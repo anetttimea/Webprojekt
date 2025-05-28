@@ -15,5 +15,22 @@
     <input type="text" name="location" placeholder="Helyszín" required>
     <button type="submit">Létrehozás</button>
   </form>
+  <script>
+    document.getElementById('create-event-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      fetch('api/create.php', {
+        method: 'POST',
+        body: formData
+      }).then(res => {
+        if (res.ok) {
+          alert('Sikeresen létrehozva!');
+          location.href = 'index.html';
+        } else {
+          alert('Hiba történt!');
+        }
+      });
+    });
+  </script>
   </body>
 </html>
