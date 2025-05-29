@@ -35,4 +35,20 @@ if (document.getElementById('event-details')) {
         <button onclick="history.back()"> Vissza</button>
       `;
     });
+    
+    document.getElementById('register-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      fetch(`api/register.php?event_id=${id}`, {
+        method: 'POST',
+        body: formData
+      }).then(res => {
+        if (res.ok) {
+          alert('Sikeres jelentkezés!');
+          location.reload(); // újratöltés a frissített jelentkezési lista miatt
+        } else {
+          alert('Hiba a jelentkezés során.');
+        }
+      });
+    });
 }
